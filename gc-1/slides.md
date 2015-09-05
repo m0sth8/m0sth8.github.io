@@ -283,7 +283,7 @@ layout: false
 * Лимит на stop-the-world
 * Остановка мира не превышает 10мс (обычно сильно быстрее)
 * Конкурентная сборка на отдельных ядрах (25%)
-* GOMAXPROC по умолчанию установлена в количество ядер
+* GOMAXPROCS по умолчанию установлена в количество ядер
 * tri-color mark-and-sweep algorithm
 
 ???
@@ -365,4 +365,4 @@ layout: false
 - Slack: http://4gophers.ru/slack
 - Golangshow: http://golangshow.com
 - Google group: https://groups.google.com/forum/#!forum/golang-ru
-- Презентация: 
+- Презентация: http://m0sth8.github.io/gc-1/
