@@ -5,7 +5,7 @@ class: center, middle, inverse
 
 # Сборка мусора в Go
 
-Адрес презентации - http://m0sth8.github.io/gc-1/
+Адрес презентации - http://bit.ly/gogc1
 
 .footnote.to-bottom[Вячеслав Бахмутов http://twitter.com/m0sth8]
 
@@ -350,6 +350,7 @@ layout: false
 
 # Источники
 
+0. [The Garbage Collection Handbook](http://gchandbook.org/)
 1. [Back To Basics: Memory allocation, a walk down the history](http://blogs.msdn.com/b/abhinaba/archive/2009/01/16/back-to-basics-memory-allocation-a-walk-down-the-history.aspx)
 2. [О новом сборщике в блоге golang](https://blog.golang.org/go15gc%20)
 4. [Связь между задержкой и пропускной способностью](http://www.futurechips.org/chip-design-for-all/littles-law.html)
@@ -365,4 +366,4 @@ layout: false
 - Slack: http://4gophers.ru/slack
 - Golangshow: http://golangshow.com
 - Google group: https://groups.google.com/forum/#!forum/golang-ru
-- Презентация: http://m0sth8.github.io/gc-1/
+- Презентация: http://bit.ly/gogc1
