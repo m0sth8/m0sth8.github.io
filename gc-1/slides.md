@@ -7,7 +7,7 @@ class: center, middle, inverse
 
 Адрес презентации - http://m0sth8.github.io/gc-1/
 
-.footnote.to-bottom[Вячеслав Бахмутов http://twitter/m0sth8]
+.footnote.to-bottom[Вячеслав Бахмутов http://twitter.com/m0sth8]
 
 ---
 name: go-gc-pdf
