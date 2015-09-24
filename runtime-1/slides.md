@@ -24,7 +24,7 @@ layout: false
 
 1. Структуры данных (slice, string, map)
 1. Эскейп анализ
-1. Планировщик
+1. Планировщик и горутины
 1. Сборка мусора
 	1. О работе с памятью
 	2. Сборка мусора
@@ -56,6 +56,8 @@ type slice struct {
 	cap   int
 }
 ```
+???
+Помимо обычных массивов. Которые представляют собой просто кусок памяти, выделяемый под нужное количество элементов. В Го есть такая штука, как слайсы (срезы).
 
 ---
 
@@ -140,6 +142,144 @@ layout: false
 template: sub-article
 
 # Эскейп анализ
+
+---
+
+# Эскейп анализ
+
+1. Go сам решает, где выделяется память
+2. Определяет, выходят ли указатели на значение за функцию или нет
+3. Если нет, то данные спокойно располагаются на стеке (с исключениями)
+4. Данные на стеке удаляются после выхода из функции и освобождения стека все скопом.
+5. Нет повода беспокоить сборщик мусора
+
+???
+Эскейп анализ позволяет определить, покидает ли та или иная переменная за область действия той области видимости, где она объявлена. Это даёт компилятору возможность понять где выделить память под объект, на стеке или в куче. Это помогает избежать лишних выделений памяти и разгрузить сборщик мусора.
+
+---
+
+.resize[![Escape analysys](img/d1.jpg)]
+
+---
+.resize[![Escape analysys](img/d2.jpg)]
+
+---
+.resize[![Escape analysys](img/d3.jpg)]
+
+---
+
+# Блеск и нищита эскейп анализа
+
+```cpp
+m := make(map[int]*T) // the map does not escape
+m[0] = new(T) // BAD: new(T) escapes
+
+```
+
+```cpp
+var y int  // BAD: y escapes
+func(p *int, x int) {
+    *p = x
+}(&y, 42)
+```
+
+```cpp
+func noescape(y ...interface{}) {
+}
+
+func main() {
+    x := 0 // BAD: x escapes
+    noescape(&x)
+}
+```
+
+.footnote.to-right[[Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw/preview)]
+
+---
+
+# Улучшения эскейп анализа
+
+```cpp
+var buf bytes.Buffer # shouldn't escape
+buf.Write([]byte{1})
+_ = buf.Bytes()
+```
+
+```cpp
+i := 0 # shouldn't escape
+sink = fmt.Sprint(&i)
+```
+
+---
+layout: false
+template: sub-article
+
+# Планировщик и горутины
+
+---
+
+# Предпосылки
+
+1. Системные треды тяжёлые
+2. Модель N:M
+3. Умное переключение и локальность
+
+???
+Причины возникновения, модели n:m
+
+---
+
+# Горутины
+
+1. Кооперативная многозадачность
+2. Модель N:M
+3. Компилятор знает про используемые регистры
+4. 2kb памяти на стек для горутины (linux)
+5. Выделение памяти при запуске
+
+---
+
+# Переключение между горутинами
+
+1. Каналы
+2. Блокирующие системные вызовы
+3. Сборка мусора
+4. Вызов функций (сплит стека)
+5. Нетполлер
+6. Добровольно (runtime.gosched)
+
+---
+
+# Переключение между горутинами
+
+.resize[![goroutine preemtion](img/s1.png)]
+
+---
+
+# Горутины изнутри
+
+.resize[![goroutine preemtion](img/s2.jpg)]
+
+### M - системный тред
+### P - процессор (контекст) 
+### G - Go рутина
+
+---
+
+# Планировщик
+
+.resize-y[![goroutine preemtion](img/s3.png)]
+
+
+---
+
+# Планировщик
+
+1. Распределение горутин с соблюдением локальности
+2. Одна глобальная очередь и локальные на каждом процессоре (P)
+3. Локальные кеш для хипа на каждом процессоре (P)
+4. Оптимизированные каналы, [подробнее](https://docs.google.com/document/u/1/d/1yIAYmbvL3JxOKOjuCyon7JhW4cSv1wy5hC0ApeGMV9s/pub)
+
 
 ---
 layout: false
@@ -459,6 +599,8 @@ layout: false
 6. [Go 1.5 concurrent garbage collector pacing](https://docs.google.com/document/d/1wmjrocXIWTr1JxU-3EQBI6BK6KgtiFArkG47XK73xIQ/preview#)
 7. [Slice internals](http://blog.golang.org/go-slices-usage-and-internals)
 8. [Go Maps](http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html)
+9. [Go Escape Analysis Flaws](https://docs.google.com/document/d/1CxgUBPlx9iJzkz9JWkb6tIpTe5q32QDmz8l0BouG0Cw/preview)
+10. [Five things that make Go fast](http://dave.cheney.net/2014/06/07/five-things-that-make-go-fast)
 
 ---
 
