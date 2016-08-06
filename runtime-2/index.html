@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Взгляд на Go изнутри</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'helvetica'; }
+      h1, h2, h3 {
+        /*font-family: 'Yanone Kaffeesatz';*/
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+
+      h1, h2, h3 {
+        /*font-family: 'Yanone Kaffeesatz';*/
+        /*font-weight: 400;*/
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 2.6em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      li {
+        line-height: 2.25em; 
+        /*font-size: 2em;*/
+      }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: #6a9fb5;
+        text-decoration: none;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .to-right {
+        float: right;
+      }
+      .to-bottom {
+        position: absolute;
+        bottom: 3em;
+      }
+      .resize > img{
+        max-width: 100%;
+        height: auto;
+      }
+      .resize-y > * {
+        max-height: 450px;
+        width: auto;
+      }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #6a9fb5;
+        color: #f3f3f3;        
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+      .inverse a {
+        color: #f3f3f3;
+      }
+
+      .sub-article {
+        padding: 0;
+      }
+
+      .sub-article h1 {
+        background: #6a9fb5;
+        color: #f3f3f3;  
+        display: block;
+        width: 100%;
+        padding: 0.2em 0;
+      }
+
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+      }
+    </style>      
+    </style>
+  </head>
+  <body>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+        sourceUrl: 'slides.md'
+      });
+    </script>
+  </body>
+</html>
